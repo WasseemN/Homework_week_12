@@ -1,7 +1,7 @@
 # Module 12 Report
 
 ## Overview of the Analysis
-The purpose of this analysis is to build a model that uses historical lending activtiy presented as imbalanced data to predict creditworthiness of borrows using machine learning. The imbalance is caused by a much higher number of healthy loans compared to to risky ones.
+The purpose of this analysis is to build a model that uses historical lending activtiy presented as imbalanced data to predict creditworthiness of borrowers using machine learning. The imbalance is caused by a much higher number of healthy loans compared to the risky ones.
 
 * I have a dataset from a peer-to-peer lending services commpany which I will use to predict the creditworthiness *'loan_status'* of customers based on pre-existing records of thier *loan_size*, *interest_rate*, *borrower_income*, *debt_to_income*, *num_of_accounts*, *deragatory_marks* and *total_debt*.
 
@@ -12,7 +12,7 @@ The purpose of this analysis is to build a model that uses historical lending ac
 
 * To use LogisticRegression method, I have to first identify the features and the target from my data. The target, typically refered to as variable *y*, will be the *loan_status*. The remaining data that will help me predict the status will be assigned to the variable *X* as features.
 
-* To learn how imbalanced the existing data on *loan_status* is, I use the `value_counts()` command on *y*. The ratio of '0' values to '1' values on the *y* columns is: $\frac{75036}{2500}\ = 30$. This suggests that RandomOverSampling method can be used to compute more data tp fall under the high risk status, i.e '1'.
+* To learn how imbalanced the existing data on *loan_status* is, I use the `value_counts()` command on *y*. The ratio of '0' values to '1' values on the *y* columns is: $\frac{75036}{2500}\ = 30$. This suggests that RandomOverSampling method can be used to resample data which fall under the high risk status, i.e '1'.
 
 * Next, I have to split these variables into train and test data for both *X* and *y*. This function will create training and testing data which will be used as part of the machine learning process to assess the accuracy of the later to be predicted data against the test data. The training data will be fitted<a href="#footnote-1"><sup>[1]</sup></a> to the model and the X_test will be used to predict the y_test awhich will then be compared to the actual *y_test *data to identify the accuracy of the prediction.
 
@@ -20,12 +20,12 @@ The purpose of this analysis is to build a model that uses historical lending ac
                 X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=1)
 ```
 
-<sup><p id="footnote-1"><sup>[1] Scaling the data using StandardScaler is of general good practice to normalize all data before fitting it to the mode. In this exercise it was not required.</sup></p>
+<sup><p id="footnote-1"><sup>[1] Scaling the data using StandardScaler is of general good practice to normalize all data before fitting it to the model. In this exercise it was not required.</sup></p>
 
 ## Results
 
 * Machine Learning Model 1 <mark>Default Data</mark>:
-  *  Model 1 uses the default (imbalanced) data tp make its predictions of *y*. The model outcome shows **100%** precision rate in predicting '0' (healthy loans) and **85%** in predicting '1' (high-risk loans).
+  *  Model 1 uses the default (imbalanced) data to make its predictions of *y*. The model outcome shows **100%** precision rate in predicting '0' (healthy loans) and **85%** in predicting '1' (high-risk loans).
 
 ```
 Balanced Accuracy Score =  0.9520479254722232 
@@ -39,7 +39,7 @@ Balanced Accuracy Score =  0.9520479254722232
 
 #
 * Machine Learning Model 2 <mark>RandomOverSampling</mark>:
-  * Model 2 uses the `RandomOverSampling()` function to increase the samples of the underdog resulting in a balanced split of the target.
+  * Model 2 uses the `RandomOverSampling()` function to increase the samples of the minority resulting in a balanced split of the target.
 
 ```
 Balanced Accuracy Score = 0.9936781215845847
@@ -56,7 +56,7 @@ Evidently, the balanced accuracy score has significantly improved using model 2.
 
 ## Summary
 
-Based on the the results and analysis demonstrated, it is valid to conclude that Model 2 provides the better, more realistic approach in analysing the data and predicting the better outcome. The approach of oversampling data where there is a bias factor of 30:1 to break even is a reasonable approach. The `value_count()` of the new data has split the imbalance as follows:
+Based on the the results and analysis demonstrated, it is valid to conclude that Model 2 provides the better, more realistic approach in analysing the data and predicting the ultimate outcome. The approach of oversampling data to break even the original bias factor of 30:1 is a reasonable approach. The `value_count()` of the new data has split the imbalance as follows:
 <center>
 
 |0| 56271|
